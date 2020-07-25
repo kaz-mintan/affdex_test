@@ -38,27 +38,27 @@ int main(int argc, char ** argsv)
   cv::Mat cv_frame;
 
   char * pixels = new char [WIDTH*HEIGHT*3];
-  //char * pixels = new char [img.columns()*img.rows()*3];
 
-  affdex::PhotoDetector detector;
-
-  affdex::ImageListener * listen = new Listener();
-  detector.setImageListener(listen);
-
+  affdex::CameraDetector detector;
   std::string classifierPath="/home/kazumi/download/affdex_sdk/data";
   detector.setClassifierPath(classifierPath);
+
+  affdex::ImageListener * listen = new Listener();
+  //detector.setImageListener(listen);
+
 
   //std::shared_ptr<affdex::FaceListener> listen(new Listener());
   //std::shared_ptr<PlottingImageListener> listenPtr(new PlottingImageListener(csvFileStream, draw_display));
   //csvFilestream
 
-  //detector.setFaceListener(listen.get());
+  detector.setFaceListener(listen.get());
   detector.setDetectAllEmotions(true);
   detector.start();
   while(1){
     cap >> cv_frame;
 
     affdex::Frame frame(cv_frame.cols,cv_frame.rows,pixels,affdex::Frame::COLOR_FORMAT::BGR);
+    std::cout<<"frame"<<std::endl;
     //affdex::Frame frame(img.columns(),img.rows(),pixels,affdex::Frame::COLOR_FORMAT::BGR);
     detector.process(frame);
   }
