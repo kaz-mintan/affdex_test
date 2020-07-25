@@ -17,7 +17,9 @@ PROGRAM=$(addsuffix .cpp, $(TARGET))
 
 $(TARGET): $(PROGRAM)
 #	$(CC) -o $(TARGET) $(PROGRAM) $(CXXFLAGS) $(CFLAGS) $(LDFLAGS)
-	g++ main.cpp -o main -std=c++11 -I/usr/local/include/affdex -L/usr/local/lib/affdex -laffdex-native `pkg-config opencv --cflags` `pkg-config opencv --libs`
+	g++ -g main_try2.cpp -o try2 -std=c++11 -I/usr/local/include/affdex -L/usr/local/lib/affdex -laffdex-native `pkg-config opencv --cflags` `pkg-config opencv --libs`
+	#g++ main_2.cpp -o main_2 -std=c++11 -I/usr/local/include/affdex -L/usr/local/lib/affdex -laffdex-native `pkg-config opencv --cflags` `pkg-config opencv --libs`
+
 	#g++ -std=c++11 $(LDFLAGS) $(CFLAGS) -o test -laffdex-native main.cpp
 	#g++ -std=c++11 $(LDFLAGS) -laffdex-native -Wl,-rpath=/usr/local/lib/affdex -Wl,-rpath-link=/usr/local/lib/affdex -o test main.cpp $(CFLAGS)
 #	g++ main.cpp -o main -std=c++11 -I/usr/local/include/affdex -L/usr/local/lib/affdex -laffdex-native
